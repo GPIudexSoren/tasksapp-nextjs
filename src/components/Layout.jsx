@@ -7,7 +7,7 @@ const Layout = ({ children, showNavbar }) => {
             {
                 showNavbar ? <Navbar /> : null
             }
-            <main className='w-full max-w-2xl px-3 md:px-0 py-3 h-full overflow-auto'>
+            <main className='w-full flex-grow max-w-7xl px-3 md:mx-3 py-3 h-full overflow-auto'>
                 {children}
             </main>
         </div>

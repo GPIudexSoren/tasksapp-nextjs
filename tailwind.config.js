@@ -6,8 +6,9 @@ module.exports = {
   ],
   theme: {
     extend: {
-      opacity: ['hover', 'disabled']
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/line-clamp')
+  ],
 }

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Button from "../Button";
+import Button from "../buttons/Button";
 import { AiOutlineLogin } from "react-icons/ai";
 import { useFormik } from "formik";
 import { useAuth } from "../../context/authContext";
@@ -85,7 +85,7 @@ const LoginForm = () => {
         <Button
           classType="primary"
           text="Log In"
-          classes="w-full md:w-auto"
+          classes="w-full col-span-2"
           icon={<AiOutlineLogin className="text-lg text-white" />}
           type="submit"
         />

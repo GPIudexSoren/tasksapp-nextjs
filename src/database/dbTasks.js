@@ -1,5 +1,9 @@
 export const getTasksByUser = (user) => {
-    const result = JSON.parse(localStorage.getItem(`${user}-tasks`));
+    let result = JSON.parse(localStorage.getItem(`${user}-tasks`));
+
+    if (!result) {
+        result = [];
+    }
 
     return result;
 }

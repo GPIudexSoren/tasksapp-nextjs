@@ -1,7 +1,7 @@
 import React from "react";
 import { AiOutlineUser, AiOutlineLogout } from "react-icons/ai";
 import { useAuth } from "../context/authContext";
-import Button from "./Button";
+import Button from "./buttons/Button";
 
 const UserMenu = ({ username }) => {
   const { logoutUser } = useAuth();

@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { AiOutlinePlus } from "react-icons/ai";
 import { VscRefresh } from "react-icons/vsc";
 import { useTasks } from "../../context/taskContext";
-import Button from "../../components/Button";
+import Button from "../buttons/Button";
 
 const TaskForm = () => {
   const { createTask } = useTasks();

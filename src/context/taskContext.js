@@ -10,10 +10,15 @@ export const useTasks = () => useContext(TaskContext);
 const TasksProvider = ({ children }) => {
     const { loggedUser } = useAuth();
     const [tasks, setTasks] = useState([]);
+    const [currentTask, setCurrentTask] = useState(null);
 
     const getUserTasks = () => {
         const tasks = getTasksByUser(loggedUser.username);
         setTasks(tasks);
+    }
+
+    const resetCurrentTask = () => {
+        setCurrentTask(null);
     }
 
     const getTasksLength = () => tasks.length;
@@ -32,6 +37,8 @@ const TasksProvider = ({ children }) => {
             tasks,
             getUserTasks,
             getTasksLength,
+            setCurrentTask,
+            resetCurrentTask,
             createTask
         }
     }>{children}</TaskContext.Provider>
