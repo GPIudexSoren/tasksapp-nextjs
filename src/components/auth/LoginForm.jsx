@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "../Button";
 import { AiOutlineLogin } from "react-icons/ai";
 import { useFormik } from "formik";
 import { useAuth } from "../../context/authContext";
 
 const LoginForm = () => {
-  const { loginUser } = useAuth();
+  const { loginUser, checkLoggedUser } = useAuth();
+
+  useEffect(async () => {
+    await checkLoggedUser();
+  }, []);
 
   const initialValues = {
     username: "",
@@ -49,7 +53,9 @@ const LoginForm = () => {
         <input
           className="bg-white/10 rounded p-2 outline-none block w-full mb-2 border border-transparent focus:border-white/50 transition"
           id="username"
+          name="username"
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           value={formik.values.username}
           autoComplete="off"
           spellCheck="false"
@@ -65,6 +71,7 @@ const LoginForm = () => {
         <input
           className="bg-white/10 rounded p-2 outline-none block w-full mb-2 border border-transparent focus:border-white/50 transition"
           id="password"
+          name="password"
           type="password"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -75,7 +82,6 @@ const LoginForm = () => {
         )}
       </div>
       <div className="flex flex-col-reverse md:grid gap-2 md:grid-cols-2 mt-5">
-        <Button text="Register" classes="w-full md:w-auto" type="button" />
         <Button
           classType="primary"
           text="Log In"

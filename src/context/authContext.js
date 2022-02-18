@@ -10,7 +10,6 @@ const AuthProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [loggedUser, setLoggedUser] = useState(null);
 
-
     const loginUser = async (credentials) => {
         const user = getUser(credentials.username);
 
@@ -22,6 +21,8 @@ const AuthProvider = ({ children }) => {
 
         setIsLoggedIn(true);
         setLoggedUser(user);
+        localStorage.setItem('isLoggedIn', true);
+        localStorage.setItem('loggedUser', JSON.stringify(user));
 
         await Router.replace('/');
     }
@@ -29,8 +30,21 @@ const AuthProvider = ({ children }) => {
     const logoutUser = async () => {
         setIsLoggedIn(false);
         setLoggedUser(null);
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('loggedUser');
 
         await Router.replace('/auth/login');
+    }
+
+    const checkLoggedUser = async () => {
+        const user = JSON.parse(localStorage.getItem('loggedUser'));
+        const isLogged = JSON.parse(localStorage.getItem('isLoggedIn'));
+
+        if (user && isLogged) {
+            setIsLoggedIn(isLogged);
+            setLoggedUser(user);
+            await Router.replace('/');
+        }
     }
 
     return <AuthContext.Provider value={
@@ -38,7 +52,8 @@ const AuthProvider = ({ children }) => {
             isLoggedIn, 
             loggedUser, 
             loginUser,
-            logoutUser 
+            logoutUser,
+            checkLoggedUser
         }
     }>{ children }</AuthContext.Provider>
 }

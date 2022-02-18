@@ -1,7 +1,7 @@
 import withAuth from '../components/withAuth';
 import TasksProvider, { useTasks } from '../context/taskContext';
 import Layout from '../components/Layout';
-import TaskForm from '../components/TaskForm';
+import TaskFormContainer from '../containers/TaskFormContainer';
 
 const Home = () => {
   const tasks = useTasks()?.tasks;
@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <TasksProvider>
       <Layout showNavbar={true}>
-        <TaskForm />
+        <TaskFormContainer />
       </Layout>
     </TasksProvider>
   )

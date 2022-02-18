@@ -1,6 +1,6 @@
 import React from "react";
 
-const Button = ({ text, icon, action, type, classType, classes }) => {
+const Button = ({ text, icon, action, type, classType, classes, isDisabled }) => {
     const typeClasses = () => {
         if (classType === 'primary')
             return 'bg-sky-500 hover:bg-sky-600 focus:bg-sky-700';
@@ -13,9 +13,10 @@ const Button = ({ text, icon, action, type, classType, classes }) => {
 
   return (
     <button
-      className={ `${ classes } ${ typeClasses() } text-white hover:translate-y-px py-2 px-3 rounded transition flex items-center justify-center gap-1` }
+      className={ `${ classes } ${ typeClasses() } text-white hover:translate-y-px py-2 px-3 rounded transition flex items-center justify-center gap-1 disabled:opacity-30 disabled:cursor-not-allowed` }
       type={ type }
       onClick={ action }
+      disabled={ isDisabled }
     >
       { icon ?  icon : null }
       { text ? <span>{ text }</span> : null }

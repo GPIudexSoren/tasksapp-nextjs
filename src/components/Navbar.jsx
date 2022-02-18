@@ -19,7 +19,7 @@ const Navbar = () => {
   const getTasksLength = useTasks()?.getTasksLength;
 
   return (
-    <header className="w-full max-w-2xl md:flex items-center justify-between px-3 md:px-0 py-3">
+    <header className="w-full max-w-2xl sm:flex items-center justify-between px-3 md:px-0 py-3">
       <div className="mb-3 md:mb-0">
         <Link href="/">
           <a>

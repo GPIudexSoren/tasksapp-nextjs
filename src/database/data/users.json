@@ -5,6 +5,12 @@
           "password": "12345678",
           "email": "aaronsibajam@gmail.com",
           "arrivalTime": "07:00:00"
+      },
+      {
+          "username": "David",
+          "password": "12345678",
+          "email": "david@gopass.cr",
+          "arrivalTime": "07:00:00"
       }
     ]
 }
