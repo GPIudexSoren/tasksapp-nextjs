@@ -35,6 +35,7 @@ const TasksProvider = ({ children }) => {
     value={
         {
             tasks,
+            currentTask,
             getUserTasks,
             getTasksLength,
             setCurrentTask,

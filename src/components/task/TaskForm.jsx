@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { AiOutlinePlus } from "react-icons/ai";
 import { VscRefresh } from "react-icons/vsc";
@@ -6,9 +6,9 @@ import { useTasks } from "../../context/taskContext";
 import Button from "../buttons/Button";
 
 const TaskForm = () => {
-  const { createTask } = useTasks();
+  const { createTask, currentTask, resetCurrentTask } = useTasks();
 
-  const initialValues = {
+  let initialValues = {
     title: "",
     description: "",
   };
@@ -40,6 +40,7 @@ const TaskForm = () => {
 
       resetForm();
       setDisableForm(true);
+      resetCurrentTask();
     } catch (error) {
       console.error(error);
     }
@@ -49,16 +50,27 @@ const TaskForm = () => {
     values = initialValues;
 
     setDisableForm(true);
+    resetCurrentTask();
   };
 
+  
+  const [disableForm, setDisableForm] = useState(true);
+  
+  useEffect(() => {
+    if (currentTask) {
+      console.log(formik.values);
+      formik.values = currentTask;
+      console.log(formik.values);
+      setDisableForm(false);
+    }
+  }, [currentTask]);
+  
   const formik = useFormik({
     initialValues,
     validate,
     onSubmit,
     onReset,
   });
-
-  const [disableForm, setDisableForm] = useState(true);
 
   return (
     <form onSubmit={formik.handleSubmit}>
