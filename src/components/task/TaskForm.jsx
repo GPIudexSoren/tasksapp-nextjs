@@ -6,11 +6,12 @@ import { useTasks } from "../../context/taskContext";
 import Button from "../buttons/Button";
 
 const TaskForm = () => {
-  const { createTask, currentTask, resetCurrentTask } = useTasks();
+  const { createTask, updateTask, currentTask, resetCurrentTask } = useTasks();
 
   let initialValues = {
-    title: "",
-    description: "",
+    id: 0,
+    title: '',
+    description: ''
   };
 
   const validate = ({ title, description }) => {
@@ -29,14 +30,19 @@ const TaskForm = () => {
     return errors;
   };
 
-  const onSubmit = ({ title, description }, { setSubmitting, resetForm }) => {
+  const onSubmit = ({ id, title, description }, { setSubmitting, resetForm }) => {
     try {
       const task = {
+        id,
         title,
         description,
-        date: Date.now(),
       };
-      createTask(task);
+
+      if (!id) {
+        createTask(task);
+      } else {
+        updateTask(task);
+      }
 
       resetForm();
       setDisableForm(true);
@@ -48,7 +54,6 @@ const TaskForm = () => {
 
   const onReset = (values, formikBag) => {
     values = initialValues;
-
     setDisableForm(true);
     resetCurrentTask();
   };
@@ -56,11 +61,9 @@ const TaskForm = () => {
   
   const [disableForm, setDisableForm] = useState(true);
   
-  useEffect(() => {
-    if (currentTask) {
-      console.log(formik.values);
-      formik.values = currentTask;
-      console.log(formik.values);
+  useEffect(async () => {
+    if (currentTask.id) {
+      await formik.setValues({ ...currentTask });
       setDisableForm(false);
     }
   }, [currentTask]);
@@ -70,6 +73,7 @@ const TaskForm = () => {
     validate,
     onSubmit,
     onReset,
+    enableReinitialize: true
   });
 
   return (
